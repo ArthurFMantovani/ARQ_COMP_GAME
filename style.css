@@ -1,0 +1,17 @@
+:root{
+  --casa-size: 42px;
+  --gap: 4px;
+}
+*{box-sizing:border-box}
+body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:12px}
+header h1{font-size:1.2rem;margin:0 0 12px}
+#controles{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+#area-tabuleiro{margin-bottom:12px}
+.tabuleiro{display:grid;gap:var(--gap);}
+.casa{width:var(--casa-size);height:var(--casa-size);border:1px solid #333;display:flex;align-items:center;justify-content:center;position:relative;background:white}
+.casa input{width:100%;height:100%;border:0;text-align:center;font-weight:700;font-size:1rem;outline:none}
+.casa .numero{position:absolute;left:2px;top:1px;font-size:0.6rem;color:#333}
+.casa.certa{background:#c8f7c5}
+.casa.errada{background:#f7c5c5}
+#pistas{display:flex;gap:24px}
+@media (max-width:600px){:root{--casa-size:34px}#pistas{flex-direction:column}}
