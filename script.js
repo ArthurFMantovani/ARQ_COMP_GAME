@@ -65,6 +65,7 @@ function criarTabuleiro(){
 
   tab.style.gridTemplateColumns = `repeat(${numCols}, var(--casa-size))`;
   tab.style.gridTemplateRows = `repeat(${numRows}, var(--casa-size))`;
+  tab.setAttribute('role','grid');
 
   // numerar inicios
   const numeracao = numerarInicios(ocupados);
@@ -74,6 +75,7 @@ function criarTabuleiro(){
     const [r,c] = k.split(',').map(Number);
     const cell = document.createElement('div');
     cell.className = 'casa';
+    cell.setAttribute('role','gridcell');
     cell.style.gridRowStart = (r - minR) + 1;
     cell.style.gridColumnStart = (c - minC) + 1;
     cell.setAttribute('aria-label', `Linha ${r} Coluna ${c}`);
@@ -173,6 +175,11 @@ function inicializarMapas(){
     inp.tabIndex = 0;
     inp.addEventListener('keydown', handleKeyDown);
     inp.addEventListener('input', handleInput);
+    inp.addEventListener('focus', (ev) =>{
+      const pals = localizarPalavrasDoInput(ev.target);
+      destacarPalavras(pals);
+    });
+    inp.addEventListener('blur', ()=>{ limparDestaques(); });
   });
 }
 
@@ -243,6 +250,27 @@ function localizarProximas(inp){
     }
   }
   return {next:null, prev:null, palavraIndex:-1};
+}
+
+function localizarPalavrasDoInput(inp){
+  const indices = [];
+  for(let i=0;i<palavrasCells.length;i++){
+    const seq = palavrasCells[i];
+    if(seq.indexOf(inp) !== -1) indices.push(i);
+  }
+  return indices;
+}
+
+function destacarPalavras(indices){
+  limparDestaques();
+  indices.forEach(i => {
+    const seq = palavrasCells[i] || [];
+    seq.forEach(inp => { if(inp && inp.parentElement) inp.parentElement.classList.add('ativa'); });
+  });
+}
+
+function limparDestaques(){
+  document.querySelectorAll('.casa.ativa').forEach(c => c.classList.remove('ativa'));
 }
 
 // Conferir e Reiniciar
