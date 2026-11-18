@@ -1,6 +1,8 @@
 :root{
   --casa-size: 42px;
   --gap: 6px;
+  --accent-green: #1fb97a;
+  --muted-blue: #0b2545;
 }
 *{box-sizing:border-box}
 body{
@@ -11,6 +13,10 @@ body{
 }
 header{padding:20px 16px;background:transparent}
 header h1{font-size:1.4rem;margin:0;text-align:center}
+#header .banner{}
+#header svg{}
+#header .icon{display:inline-block;opacity:0.95}
+#header .banner{display:flex;gap:12px;justify-content:center;margin-top:12px}
 #jogo{max-width:1100px;margin:18px auto;padding:18px}
 #controles{display:flex;gap:12px;align-items:center;margin:12px 0 18px;justify-content:center}
 #area-tabuleiro{display:flex;justify-content:center;margin-bottom:18px}
@@ -39,3 +45,16 @@ button:hover{filter:brightness(0.98)}
 }
 
 @media (max-width:600px){:root{--casa-size:34px}#pistas{flex-direction:column;align-items:flex-start}}
+
+/* Fundo com padrão de circuito (SVG data URI) */
+body::after{
+  content: '';
+  position: fixed;inset:0;pointer-events:none;opacity:0.06;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Cdefs%3E%3Cpattern id='p' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Crect width='80' height='80' fill='none'/%3E%3Cpath d='M10 10h60v60M30 0v20M0 30h20' stroke='%231fb97a' stroke-width='1' stroke-linecap='round' opacity='0.6'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E");
+  background-repeat:repeat;mix-blend-mode:overlay;z-index:0;
+}
+
+/* detalhes verdes: usar variavel */
+.casa.certa{background:linear-gradient(180deg,#f0fff4,#e6ffed);border-color: rgba(31,185,122,0.5)}
+#contador{color:var(--accent-green)}
+button.primary-green{background:var(--accent-green)}
