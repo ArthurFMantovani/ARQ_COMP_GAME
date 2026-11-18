@@ -201,7 +201,14 @@ function handleInput(e){
 
   // auto avançar para próxima célula da mesma palavra, se houver
   const {next} = localizarProximas(inp);
-  if(next){ next.focus(); }
+  if(next){
+    // avançar o foco sem forçar o scroll do navegador
+    // usar requestAnimationFrame para evitar competições com o evento de input
+    requestAnimationFrame(() => {
+      try{ next.focus({preventScroll: true}); }
+      catch(_){ next.focus(); }
+    });
+  }
 }
 
 function handleKeyDown(e){
