@@ -1,21 +1,41 @@
 :root{
   --casa-size: 42px;
-  --gap: 4px;
+  --gap: 6px;
 }
 *{box-sizing:border-box}
-body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:12px}
-header h1{font-size:1.2rem;margin:0 0 12px}
-#controles{display:flex;gap:8px;align-items:center;margin-bottom:12px}
-#area-tabuleiro{margin-bottom:12px}
-.tabuleiro{display:grid;gap:var(--gap);}
-.casa{width:var(--casa-size);height:var(--casa-size);border:1px solid #333;display:grid;place-items:center;position:relative;background:white}
-.casa input{position:absolute;inset:0;padding:0;margin:0;border:0;background:transparent;font-family:inherit;text-align:center;font-weight:700;font-size:1.05rem;line-height:var(--casa-size);outline:none;box-sizing:border-box;caret-color:#000;min-width:0}
-.casa{overflow:visible}
-.casa .numero{position:absolute;left:2px;top:1px;font-size:0.6rem;color:#333}
-.casa.certa{background:#c8f7c5}
-.casa.errada{background:#f7c5c5}
-.casa.ativa{box-shadow:inset 0 0 0 3px rgba(0,123,255,0.15)}
-.casa:focus-within{outline:2px solid rgba(0,123,255,0.35);outline-offset:2px}
-#tabuleiro[role="grid"]{align-items: start}
-#pistas{display:flex;gap:24px}
-@media (max-width:600px){:root{--casa-size:34px}#pistas{flex-direction:column}}
+body{
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  background:linear-gradient(180deg,#f6f8fb,#ffffff);
+  color:#102a43;
+}
+header{padding:20px 16px;background:transparent}
+header h1{font-size:1.4rem;margin:0;text-align:center}
+#jogo{max-width:1100px;margin:18px auto;padding:18px}
+#controles{display:flex;gap:12px;align-items:center;margin:12px 0 18px;justify-content:center}
+#area-tabuleiro{display:flex;justify-content:center;margin-bottom:18px}
+.tabuleiro{display:grid;gap:var(--gap);background:linear-gradient(180deg,#fff,#fbfdff);padding:10px;border-radius:8px;border:1px solid rgba(16,42,67,0.06);box-shadow:0 6px 18px rgba(16,42,67,0.04)}
+.casa{width:var(--casa-size);height:var(--casa-size);border-radius:6px;border:1px solid rgba(16,42,67,0.12);display:block;position:relative;background:#fff;box-shadow:0 1px 0 rgba(16,42,67,0.02);transition:transform .08s ease, background .18s ease}
+.casa input{position:absolute;inset:0;padding:0;margin:0;border:0;background:transparent;font-family: 'Courier New', Courier, monospace;text-align:center;font-weight:700;font-size:1.05rem;line-height:var(--casa-size);outline:none;box-sizing:border-box;caret-color:#0b2545;min-width:0}
+.casa .numero{position:absolute;left:6px;top:4px;font-size:0.6rem;color:#334e68;font-weight:600}
+.casa.certa{background:#e6ffed;border-color:#9be6a4}
+.casa.errada{background:#fff0f0;border-color:#ffb3b3}
+.casa.ativa{box-shadow:inset 0 0 0 3px rgba(0,123,255,0.08);transform:translateY(-2px)}
+.casa:focus-within{outline:3px solid rgba(0,123,255,0.12);outline-offset:2px}
+
+#pistas{display:flex;gap:32px;justify-content:center}
+#pistas > div{max-width:440px}
+#pistas h2{margin:0 0 8px;font-size:1rem;color:#0b2545}
+#pistas ol{padding-left:20px;margin:0}
+#pistas li{margin:6px 0;color:#123a55}
+
+button{background:#0b63d1;color:white;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600}
+button:hover{filter:brightness(0.98)}
+#contador{font-weight:700;color:#0b2545}
+
+@media (max-width:900px){
+  #jogo{padding:12px}
+  .tabuleiro{padding:8px}
+}
+
+@media (max-width:600px){:root{--casa-size:34px}#pistas{flex-direction:column;align-items:flex-start}}
