@@ -95,6 +95,9 @@ function criarTabuleiro(){
     input.maxLength = 1;
     input.className = 'letra';
     input.setAttribute('aria-label', `Casa Linha ${r} Coluna ${c}`);
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+    input.inputMode = 'text';
     // solução armazenada em data-solution
     input.dataset.solution = v.letter.toUpperCase();
     cell.appendChild(input);
